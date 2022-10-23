@@ -62,7 +62,48 @@
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
+      
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/  xlink" x="0px" y="0px"
+              width="20px" height="20px" viewBox="0 0 571.815 571.815" style="fill:white"
+              xml:space="preserve">
+                  <g>
+                    <g>
+                      <path d="M117.518,296.042l333.161,272.132c8.286,6.646,12.062,3.941,8.43-6.04l-88.442-260.049
+                        c-3.63-9.981-3.596-26.156,0.076-36.123l88.29-256.26c3.672-9.966-0.101-12.702-8.431-6.11L117.594,272.07
+                        C109.265,278.661,109.231,289.395,117.518,296.042z"/>
+                    </g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+          </svg>
     </a>
   </div>
 
@@ -73,7 +114,7 @@
     <!-- Dashboard -->
     <li class="menu-item active">
       <a href="index.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+        <!-- <i class="menu-icon tf-icons bx bx-home-circle"></i> -->
         <div data-i18n="Analytics">Dashboard</div>
       </a>
     </li>
@@ -81,7 +122,7 @@
     <!-- Layouts -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <!-- <i class="menu-icon tf-icons bx bx-layout"></i> -->
         <div data-i18n="Layouts">Layouts</div>
       </a>
 

@@ -1,0 +1,24 @@
+
+================================================================================
+****** Separating Admin and Frontend controller of same name using namespace***
+================================================================================
+    App\Com\Http\Controllers\Manager\UserController
+    App\Com\Http\Controllers\Admin\UserController
+
+    Route::group([
+        'prefix' => 'admin',
+        'namespace' => 'Admin'
+    ], function(){
+        Route::get('/user', 'UserController@index');
+    });
+
+    Route::group([
+        'prefix' => 'manager',
+        'namespace' => 'Manager'
+    ], function(){
+        Route::get('/user', 'UserController@index');
+    });
+
+    return redirect()->action('Manager\UserController@index');
+================================================================================
+================================================================================    

@@ -7,14 +7,12 @@ export default defineConfig({
             input: [
                 'resources/css/app.css', 'resources/js/app.js',
 
-               
-
-                
                 'resources/assets/vendor/css/core.css',
                 'resources/assets/vendor/css/theme-default.css',
                 'resources/assets/css/demo.css',
                 'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css',
                 'resources/assets/vendor/libs/apex-charts/apex-charts.css',
+               
 
 
                 'resources/assets/vendor/js/helpers.js',
