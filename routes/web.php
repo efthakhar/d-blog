@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard');
+    // return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -21,6 +22,7 @@ Route::get('/dashboard/help', function () {
 Route::group(['namespace' => 'dashboard'], function(){
 
     Route::get('/dashboard/categories/create',[CategoryController::class,'create']);
+    Route::post('/dashboard/categories',[CategoryController::class,'store']);
     
 });
 
