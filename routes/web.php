@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\dashboard\CategoryController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,3 +17,10 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/help', function () {
     return view('dashboard.help');
 });
+
+Route::group(['namespace' => 'dashboard'], function(){
+
+    Route::get('/dashboard/categories/create',[CategoryController::class,'create']);
+    
+});
+
