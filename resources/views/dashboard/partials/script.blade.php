@@ -29,8 +29,8 @@
                 'resources/assets/vendor/js/bootstrap.js',
                 'resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js',
                 'resources/assets/vendor/js/menu.js',
-                'resources/assets/vendor/libs/apex-charts/apexcharts.js',
+              
                 'resources/assets/js/main.js',
-                'resources/assets/js/dashboards-analytics.js',
+                
         
     ])

@@ -116,3 +116,23 @@ let menu, animate;
   // Auto update menu collapsed/expanded based on the themeConfig
   window.Helpers.setCollapsed(true, false);
 })();
+
+//// menu js
+let url = window.location.pathname;
+let links = document.getElementsByClassName('menu-link')
+for(let i=0;i<links.length;i++){
+
+    if( url === links[i].getAttribute('href'))
+    {
+        
+            let li = links[i].closest('li')
+            let ul = links[i].closest('ul')
+            let main = ul.closest('li')
+            li.classList.add('active')
+            main.classList.add('active')
+            main.classList.add('open')
+        
+    }
+    
+}
+

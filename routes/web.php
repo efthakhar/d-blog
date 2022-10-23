@@ -11,3 +11,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.overview');
 });
+
+Route::get('/dashboard/help', function () {
+    return view('dashboard.help');
+});
