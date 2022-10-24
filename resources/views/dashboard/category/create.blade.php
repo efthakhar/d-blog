@@ -85,6 +85,19 @@
                           />
                         </div>
 
+                        <!-- parent category -->
+                        <div class="mb-3">
+                          <label class="form-label" >parent category</label>
+                          <select name="parent_category_id" class="form-control">
+                              <option value=" " selected>none</option>
+                              @foreach($categories as $cat)
+                              <option value="{{$cat->id}}">{{$cat->category_name}}</option>
+                              @endforeach
+                          </select>
+            
+                         
+                        </div>
+
                         <!-- category image -->
                         <div class="mb-3">
                           <label class="form-label" for="category_img">Category image</label>

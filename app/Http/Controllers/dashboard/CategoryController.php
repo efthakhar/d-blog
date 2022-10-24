@@ -10,26 +10,28 @@ class CategoryController extends Controller
 {
     function index()
     {
-      $categories = Category::select('category_name','category_slug','parent_category_id','category_img_url')
-                    ->orderBy("id", "desc")
-                    ->paginate(10);
+      $categories = Category::paginate(10);
       return view('dashboard.category.list',['categories'=>$categories]);
     }
 
     function list()
     {
-     return $categories = Category::select('id','category_name')
-                    ->orderBy("category_name", "desc")->get();
+    
+     return  Category::select('id','category_name')
+                    ->orderBy("category_name", "asc")->get();
     }
 
+    
     function create()
     {
-        return  view('dashboard.category.create');
+        $categories = $this->list();
+        return  view('dashboard.category.create',['categories'=>$categories]);
     }
 
     function store(Request $request)
     {
-        //Category::truncate();
+        // Category::truncate();
+        // dd();
         $validatedData = $request->validate([
           'category_name' => 'required|unique:categories|max:255',
           'category_slug' => 'unique:categories|max:255',      

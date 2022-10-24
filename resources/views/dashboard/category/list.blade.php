@@ -54,16 +54,36 @@
                           <th>category name</th>
                           <th>slug</th>
                           <th>parent category</th>
+                          <th>sub categories</th>
                           <th>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
                        @foreach($categories as $cat)
                         <tr>
-                          <td><img src="{{$cat->category_img_url}}" alt="" class="table_img"></td>
+                          <td>
+                              @if($cat->category_img_url)
+                              <img src="{{$cat->category_img_url}}" alt="" class="table_img">
+                              @endif
+                          </td>
                           <td>{{$cat->category_name}}</td>
                           <td>{{$cat->category_slug}}</td>
-                          <td>{{$cat->category_parent_id}}</td>
+                          <td >
+                              @if($cat->parentcat)
+                                <button class="btn btn-sm btn-outline-danger">
+                                {{$cat->parentcat->category_name}}
+                                </button>
+                              @endif
+                          </td>
+                          <td>
+                              <div class="subcats_cell">
+                              @foreach($cat->subcategories as $subcat)
+                                <button class="btn btn-sm btn-outline-success">
+                                  {{$subcat->category_name}}
+                                </button>
+                              @endforeach 
+                              </div> 
+                          </td>
                           
                           <td>
                             <div class="dropdown">

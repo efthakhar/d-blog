@@ -106,9 +106,21 @@
   margin-top: 1rem;
 }
 
+
+/* tablse ccss */
+table .btn-sm{ margin:1px;}
 .table-responsive{
   min-height: 170px;
 }
-.table_img{
-  width: 50px; height: 40px; 
+
+.subcats_cell{
+  display: flex;
+  flex-wrap: wrap;
+}
+td .table_img{
+  border-radius: 3px;
+  left:5px;
+  width: 60px;
+  height: 50px;
+  object-fit: cover;
 }
