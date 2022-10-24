@@ -16,6 +16,12 @@ class CategoryController extends Controller
       return view('dashboard.category.list',['categories'=>$categories]);
     }
 
+    function list()
+    {
+     return $categories = Category::select('id','category_name')
+                    ->orderBy("category_name", "desc")->get();
+    }
+
     function create()
     {
         return  view('dashboard.category.create');

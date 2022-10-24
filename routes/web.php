@@ -21,6 +21,7 @@ Route::get('/dashboard/help', function () {
 
 Route::group(['namespace' => 'dashboard'], function(){
     Route::get('/dashboard/categories',[CategoryController::class,'index']);
+    Route::get('/categories/list',[CategoryController::class,'list']);
     Route::get('/dashboard/categories/create',[CategoryController::class,'create']);
     Route::post('/dashboard/categories',[CategoryController::class,'store']);
     
