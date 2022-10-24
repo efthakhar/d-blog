@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    function index()
+    {
+      $categories = Category::paginate(2);
+
+      return view('dashboard.category.list',['categories'=>$categories]);
+    }
+
     function create()
     {
         return  view('dashboard.category.create');
@@ -42,6 +49,7 @@ class CategoryController extends Controller
         $category = new Category();
         $category->category_name = $request->category_name;
         $category->category_slug = $slug;
+        $category->parent_category_id = $request->parent_category_id;
         $category->category_description = $request->category_description;
         $category->category_img_url = $category_img? $category_img_url:'';
 
