@@ -15,10 +15,11 @@
     />
 
     <title>Dashboard</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
 
     @includeif('dashboard.partials.style')
+   
     
   </head>
 
@@ -96,9 +97,9 @@
                                 <a class="dropdown-item" href="javascript:void(0);"
                                   ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                 >
-                                <a class="dropdown-item" href="javascript:void(0);"
-                                  ><i class="bx bx-trash me-1"></i> Delete</a
-                                >
+                                <button class="dropdown-item deleteRecord" id="{{$cat->id}}">
+                                  <i class="bx bx-trash me-1 "></i> Delete
+                                </button>
                               </div>
                             </div>
                           </td>
@@ -119,12 +120,6 @@
             </div>
 
 
-            <?php
-            //  echo '<pre>';
-            //     // var_dump($categories);
-            //     echo $categories->links()->paginator->total;
-            //  echo '</pre>' ;
-            ?>
             <!-- / Content -->
 
             @includeif('dashboard.partials.footer')
@@ -154,6 +149,6 @@
     </div>
 
     @includeif('dashboard.partials.script')
-
+    @vite('resources/assets/js/category.js')
   </body>
 </html>

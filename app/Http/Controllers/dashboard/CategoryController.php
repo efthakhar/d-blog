@@ -10,6 +10,7 @@ class CategoryController extends Controller
 {
     function index()
     {
+      
       $categories = Category::paginate(10);
       return view('dashboard.category.list',['categories'=>$categories]);
     }
@@ -66,5 +67,11 @@ class CategoryController extends Controller
               //  ->with('status', 'category created successfully')
               //  ->with('category_img_url', $category->category_img_url);
 
+    }
+
+    public function delete($cat_id)
+    {
+        Category::destroy($cat_id);
+      
     }
 }
