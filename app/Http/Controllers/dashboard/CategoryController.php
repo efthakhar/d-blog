@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
     function index()
     {
-      $categories = Category::paginate(2);
+      $categories = Category::select('category_name','category_slug','parent_category_id')
+                    ->orderBy("id", "desc")
+                    ->paginate(10);
 
       return view('dashboard.category.list',['categories'=>$categories]);
     }
@@ -55,9 +57,9 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect('/dashboard/categories/create')
-               ->with('status', 'category created successfully')
-               ->with('category_img_url', $category->category_img_url);
+        return redirect('/dashboard/categories');
+              //  ->with('status', 'category created successfully')
+              //  ->with('category_img_url', $category->category_img_url);
 
     }
 }

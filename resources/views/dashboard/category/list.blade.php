@@ -47,7 +47,7 @@
                 <h5 class="card-header">Categories</h5>
                 <div class="card-body">
                   <div class="table-responsive text-nowrap">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover table-sm">
                       <thead>
                         <tr>
                           <th>category name</th>
@@ -57,7 +57,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($categories as $cat)
+                       @foreach($categories as $cat)
                         <tr>
                           <td>{{$cat->category_name}}</td>
                           <td>{{$cat->category_slug}}</td>
@@ -69,7 +69,7 @@
                                 type="button"
                                 class="btn btn-primary btn-sm p-1 dropdown-toggle hide-arrow"
                                 data-bs-toggle="dropdown"
-                              >select options </button>
+                              >options </button>
                               <div class="dropdown-menu">
                                 <a class="dropdown-item" href="javascript:void(0);"
                                   ><i class="bx bx-edit-alt me-1"></i> Edit</a
@@ -85,15 +85,22 @@
                       </tbody>
                     </table>
                   </div>
+                    @if ($categories->links()->paginator->hasPages())
+                        <div class="mt-4 p-4 box has-text-centered">
+                            {{ $categories->links() }}
+                        </div>
+                    @endif
                 </div>
               </div>
               <!--/ Bordered Table -->
 
             </div>
 
+
             <?php
             //  echo '<pre>';
-            //     var_dump($categories);
+            //     // var_dump($categories);
+            //     echo $categories->links()->paginator->total;
             //  echo '</pre>' ;
             ?>
             <!-- / Content -->
