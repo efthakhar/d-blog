@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('category_name')->unique();
             $table->string('category_slug')->unique();
+            $table->bigInteger('parent_category_id')->nullable();
             $table->string('category_img_url')->nullable();
             $table->string('category_description')->nullable();
         });
