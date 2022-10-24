@@ -109,3 +109,6 @@
 .table-responsive{
   min-height: 170px;
 }
+.table_img{
+  width: 50px; height: 40px; 
+}

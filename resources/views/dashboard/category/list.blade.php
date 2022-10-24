@@ -50,6 +50,7 @@
                     <table class="table table-bordered table-hover table-sm">
                       <thead>
                         <tr>
+                          <th>#</th>
                           <th>category name</th>
                           <th>slug</th>
                           <th>parent category</th>
@@ -59,6 +60,7 @@
                       <tbody>
                        @foreach($categories as $cat)
                         <tr>
+                          <td><img src="{{$cat->category_img_url}}" alt="" class="table_img"></td>
                           <td>{{$cat->category_name}}</td>
                           <td>{{$cat->category_slug}}</td>
                           <td>{{$cat->category_parent_id}}</td>
