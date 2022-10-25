@@ -45,8 +45,17 @@
 
               <!-- Bordered Table -->
               <div class="card">
-                <h5 class="card-header">Categories</h5>
+              
+                  <h5 class="card-header">Categories</h5>
+                
                 <div class="card-body">
+                  <div class="row mb-2">
+                    <div class="col-md-4">
+                    <input name="catfilter"
+                     class="form-control form-control-m filtercatinput" type="text" placeholder="form-control-sm">
+                    </div>
+                    <button class="btn btn-sm btn-primary col-md-2 filtercat" >filter</button>
+                  </div>
                   <div class="table-responsive text-nowrap">
                     <table class="table table-bordered table-hover table-sm">
                       <thead>

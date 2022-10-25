@@ -8,18 +8,24 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
+      $q = $request->query('q');
+
+      $categories = 
+      Category::when($q, function($query,$q){
+        $query->where('category_name',"LIKE",'%'.$q.'%');
+      })
+      ->orderby('id','desc')
+      ->paginate(10) 
+      ->appends(request()->query());
       
-      $categories = Category::paginate(10);
       return view('dashboard.category.list',['categories'=>$categories]);
     }
 
     function list()
-    {
-    
-     return  Category::select('id','category_name')
-                    ->orderBy("category_name", "asc")->get();
+    {  
+      return  Category::select('id','category_name')->orderBy("category_name", "asc")->get();
     }
 
     
