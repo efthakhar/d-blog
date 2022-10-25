@@ -28,7 +28,7 @@ class TagController extends Controller
         $tag = new Tag();
         $tag->tag_name = $request->tag_name;
         $tag->tag_slug = $slug;
-        $tag->category_description = $request->tag_description;
+        $tag->tag_description = $request->tag_description;
 
         $tag->save();
         return redirect('/dashboard/tags/create');
