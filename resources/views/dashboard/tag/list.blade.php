@@ -51,11 +51,11 @@
                 <div class="card-body">
                   <div class="d-flex flex-wrap">
                     
-                    <input name="catfilter"
-                     class="form-control form-control-sm filtercatinput mb-2 me-2" type="text" style="width: 200px ;"
+                    <input name="tagfilter"
+                     class="form-control form-control-sm filtertaginput mb-2 me-2" type="text" style="width: 200px ;"
                      placeholder="search tag.....">
                     
-                    <button class="btn btn-sm btn-primary filtercat mb-2" style="width: 90px;">filter</button>
+                    <button class="btn btn-sm btn-primary filtertag mb-2" style="width: 90px;">filter</button>
 
                   </div>
                   <div class="table-responsive text-nowrap">
@@ -71,8 +71,8 @@
                        @foreach($tags as $tag)
                         <tr>
                          
-                          <td>{{$cat->tag_name}}</td>
-                          <td>{{$cat->tag_slug}}</td>
+                          <td>{{$tag->tag_name}}</td>
+                          <td>{{$tag->tag_slug}}</td>
                           <td>
                             <div class="dropdown">
                               <button
@@ -87,7 +87,7 @@
                                 <a class="dropdown-item" href="/dashboard/tags/{{$tag->id}}">
                                   <i class="bx bx-edit-alt me-1"></i>view
                                  </a>
-                                <button class="dropdown-item deleteRecord" id="{{$tag->id}}">
+                                <button class="dropdown-item deleteRecord" data-tag_id="{{$tag->id}}">
                                   <i class="bx bx-trash me-1 "></i> Delete
                                 </button>
                               </div>
