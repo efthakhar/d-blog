@@ -21,10 +21,15 @@ Route::get('/dashboard/help', function () {
 
 Route::group(['namespace' => 'dashboard'], function(){
     
-    Route::get('/dashboard/categories',[CategoryController::class,'index']);
+    Route::get('/dashboard/categories',[CategoryController::class,'index'])
+    ->name('category.index');
     Route::get('/categories/list',[CategoryController::class,'list']);
     Route::get('/dashboard/categories/create',[CategoryController::class,'create']);
     Route::post('/dashboard/categories',[CategoryController::class,'store']);
+    Route::get('/dashboard/categories/{id}/edit',[CategoryController::class,'edit'])
+    ->name('category.edit');
+    Route::put('/dashboard/categories/{id}/update',[CategoryController::class,'update'])
+    ->name('category.update');
     Route::delete('/dashboard/categories/{id}',[CategoryController::class,'delete']);
     
 });

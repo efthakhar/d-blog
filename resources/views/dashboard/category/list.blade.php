@@ -94,7 +94,7 @@
                                 data-bs-toggle="dropdown"
                               >options </button>
                               <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0);"
+                                <a class="dropdown-item" href="/dashboard/categories/{{$cat->id}}/edit"
                                   ><i class="bx bx-edit-alt me-1"></i> Edit</a
                                 >
                                 <button class="dropdown-item deleteRecord" id="{{$cat->id}}">

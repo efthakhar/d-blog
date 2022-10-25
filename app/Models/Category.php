@@ -9,6 +9,14 @@ class Category extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    
+    protected $fillable = [
+        'category_name', 
+        'category_slug', 
+        'parent_category_id',
+        'category_img_url',
+        'category_description',
+    ];
 
     public function  subcategories()
     {

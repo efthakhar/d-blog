@@ -29,10 +29,10 @@ class CategoryController extends Controller
         return  view('dashboard.category.create',['categories'=>$categories]);
     }
 
+
     function store(Request $request)
     {
-        // Category::truncate();
-        // dd();
+        
         $validatedData = $request->validate([
           'category_name' => 'required|unique:categories|max:255',
           'category_slug' => 'unique:categories|max:255',      
@@ -64,9 +64,36 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect('/dashboard/categories');
-              //  ->with('status', 'category created successfully')
-              //  ->with('category_img_url', $category->category_img_url);
+             
 
+    }
+
+    function edit($id)
+    {
+        $category = Category::find($id);
+        $categories = $this->list();
+        return view('dashboard.category.edit',['category'=> $category,'categories'=>$categories]);
+    }
+
+    function update(Request $request, $id)
+    {
+      
+        $validatedData = $request->validate([
+          'category_name' => 'required|unique:categories,category_name,'.$id.'|max:255',
+          'category_slug' => 'unique:categories,category_slug,'.$id.'|max:255',      
+        ]);
+
+        Category::where('id',$id)
+        ->update([
+          'category_name' => $request->category_name,
+          'category_slug' => $request->category_slug,
+          'parent_category_id' => $request->parent_category_id,
+          'category_description' => $request->category_description,
+          'category_img_url' => $request->category_img_url,
+        ]);
+
+        return redirect()->route('category.edit',['id'=>$id])
+              ->with('category_update_status', 'successfully updated category');
     }
 
     public function delete($cat_id)
