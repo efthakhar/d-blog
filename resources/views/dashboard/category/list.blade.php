@@ -95,8 +95,11 @@
                               >options </button>
                               <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/dashboard/categories/{{$cat->id}}/edit"
-                                  ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                                >
+                                  ><i class="bx bx-edit-alt me-1"></i> Edit
+                                 </a>
+                                <a class="dropdown-item" href="/dashboard/categories/{{$cat->id}}">
+                                  <i class="bx bx-edit-alt me-1"></i>view
+                                 </a>
                                 <button class="dropdown-item deleteRecord" id="{{$cat->id}}">
                                   <i class="bx bx-trash me-1 "></i> Delete
                                 </button>

@@ -24,7 +24,7 @@ class CategoryController extends Controller
 
     
     function create()
-    {
+    {      
         $categories = $this->list();
         return  view('dashboard.category.create',['categories'=>$categories]);
     }
@@ -66,6 +66,12 @@ class CategoryController extends Controller
         return redirect('/dashboard/categories');
              
 
+    }
+
+    function show($id)
+    {
+        $category = Category::find($id);
+        return view('dashboard.category.show',['category'=> $category]);
     }
 
     function edit($id)
