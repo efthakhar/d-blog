@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    function index(Request $request)
+    {
+      $q = $request->query('q');
+
+      $tags = Tag::when($q, function($query,$q){
+        $query->where('tag_name',"LIKE",'%'.$q.'%');
+      })
+      ->orderby('id','desc')->paginate(10) ->appends(request()->query());
+      
+      return view('dashboard.tag.list',['tags'=>$tags]);
+
+    }
+    
     function create()
     {           
         return  view('dashboard.tag.create');

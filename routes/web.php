@@ -32,6 +32,7 @@ Route::group(['namespace' => 'dashboard'], function(){
     Route::delete('/dashboard/categories/{id}',[CategoryController::class,'delete']);
 
     // tag routes for dashboard
+    Route::get('/dashboard/tags',[TagController::class,'index'])->name('tag.index');
     Route::get('/dashboard/tags/create',[TagController::class,'create'])->name('tag.create');
     Route::post('/dashboard/tags',[TagController::class,'store'])->name('tag.store');
     
