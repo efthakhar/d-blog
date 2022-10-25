@@ -33,6 +33,7 @@ Route::group(['namespace' => 'dashboard'], function(){
 
     // tag routes for dashboard
     Route::get('/dashboard/tags/create',[TagController::class,'create'])->name('tag.create');
+    Route::post('/dashboard/tags',[TagController::class,'store'])->name('tag.store');
     
 });
 
