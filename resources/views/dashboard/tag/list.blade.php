@@ -87,7 +87,7 @@
                                 <a class="dropdown-item" href="/dashboard/tags/{{$tag->id}}">
                                   <i class="bx bx-edit-alt me-1"></i>view
                                  </a>
-                                <button class="dropdown-item deleteRecord" data-tag_id="{{$tag->id}}">
+                                <button class="dropdown-item deleteRecord" data-tag-id="{{$tag->id}}">
                                   <i class="bx bx-trash me-1 "></i> Delete
                                 </button>
                               </div>
@@ -128,15 +128,6 @@
       
     </div>
     <!-- / Layout wrapper -->
-
-    <div class="buy-now">
-      <a
-        href=""
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
 
     @includeif('dashboard.partials.script')
     @vite('resources/assets/js/tag.js')

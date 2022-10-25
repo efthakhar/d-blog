@@ -15,7 +15,7 @@ class TagController extends Controller
       $tags = Tag::when($q, function($query,$q){
         $query->where('tag_name',"LIKE",'%'.$q.'%');
       })
-      ->orderby('id','desc')->paginate(2) ->appends(request()->query());
+      ->orderby('id','desc')->paginate(10) ->appends(request()->query());
       
       return view('dashboard.tag.list',['tags'=>$tags]);
 
@@ -47,5 +47,11 @@ class TagController extends Controller
         return redirect('/dashboard/tags/create');
              
 
+    }
+
+    public function delete($tag_id)
+    {
+        Tag::destroy($tag_id);
+      
     }
 }

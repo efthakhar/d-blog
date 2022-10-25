@@ -26,6 +26,7 @@ export default defineConfig({
                 'resources/assets/vendor/libs/apex-charts/apexcharts.js',
                 'resources/assets/js/main.js',
                 'resources/assets/js/category.js',
+                'resources/assets/js/tag.js',
                 'resources/assets/js/dashboards-analytics.js',
 
 
