@@ -154,6 +154,24 @@
           </li>
       </ul>
     </li>
+    <!-- Tag -->
+    <li class="menu-item toggle_main">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <div>Tag</div>
+      </a>
+      <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="/dashboard/tags" class="menu-link">
+              <div data-i18n="Without menu">Tag List</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/dashboard/tags/create" class="menu-link">
+              <div data-i18n="Without menu">New Tag</div>
+            </a>
+          </li>
+      </ul>
+    </li>
 
 
   </ul>
