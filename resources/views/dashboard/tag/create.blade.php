@@ -84,15 +84,11 @@
                             </div>
 
                             
-
                             <!-- tag description -->
                             <div class="mb-3">
                             <label class="form-label" for="basic-default-message">tag description</label>
-                            <textarea name="tag_description" class="form-control"
-                                placeholder="tag about something......" 
-                                >{{old('tag_description')}}</textarea>
+                            <textarea name="tag_description" class="form-control" placeholder="tag about something......" >{{old('tag_description')}}</textarea>
                             </div>
-
 
 
                             <button type="submit" class="btn btn-primary">save tag</button>

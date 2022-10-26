@@ -95,13 +95,23 @@ class CategoryController extends Controller
           'category_slug' => 'unique:categories,category_slug,'.$id.'|max:255',      
         ]);
 
+        $category_img = $request->file('category_img');
+
+        if($category_img){
+
+          $img_name = time().$category_img->getClientOriginalName();
+          $path = $category_img->storeAs('uploads',$img_name,'public');
+          $category_img_url = "/storage/{$path}";
+
+        }
+
         Category::where('id',$id)
         ->update([
           'category_name' => $request->category_name,
           'category_slug' => $request->category_slug,
           'parent_category_id' => $request->parent_category_id,
           'category_description' => $request->category_description,
-          'category_img_url' => $request->category_img_url,
+          'category_img_url' => $category_img? $category_img_url:''
         ]);
 
         return redirect()->route('category.edit',['id'=>$id])
