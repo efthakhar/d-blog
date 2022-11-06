@@ -38,6 +38,10 @@
       </svg>
     </a>
   </div>
+  
+  <!-- <div class="topbar-heading">
+    <h6>Hi blogger, welcome to dblog blog system</h6>
+  </div> -->
 
   <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
     

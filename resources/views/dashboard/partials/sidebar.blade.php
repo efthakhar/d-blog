@@ -121,7 +121,7 @@
 
 
     
-    <li class="menu-item toggle_main">
+    <!-- <li class="menu-item toggle_main">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         
         <div>Layouts</div>
@@ -134,7 +134,7 @@
             </a>
           </li>
       </ul>
-    </li>
+    </li> -->
 
     <!-- Category -->
     <li class="menu-item toggle_main">

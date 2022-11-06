@@ -47,7 +47,7 @@
               <div class="card">
               
                   <h5 class="card-header">Categories</h5>
-                
+
                 <div class="card-body">
                   <div class="d-flex flex-wrap">
                     

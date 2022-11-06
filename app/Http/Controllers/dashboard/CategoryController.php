@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\dashboard;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Services\FileService;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
 class CategoryController extends Controller
 {
     function index(Request $request)
@@ -19,13 +19,16 @@ class CategoryController extends Controller
       ->orderby('id','desc')
       ->paginate(10) 
       ->appends(request()->query());
-      
+
       return view('dashboard.category.list',['categories'=>$categories]);
     }
 
     function list()
     {  
-      return  Category::select('id','category_name')->orderBy("category_name", "asc")->get();
+      return  Category::select('id','category_name')
+                        ->orderBy("category_name", "asc")
+                        ->get()
+                        ->keyBy('id');
     }
 
     
@@ -36,7 +39,7 @@ class CategoryController extends Controller
     }
 
 
-    function store(Request $request)
+    function store(Request $request,FileService $fileservice)
     {
         
         $validatedData = $request->validate([
@@ -50,22 +53,18 @@ class CategoryController extends Controller
 
         $category_img = $request->file('category_img');
 
-        if($category_img){
-
-          $img_name = time().$category_img->getClientOriginalName();
-          $path = $category_img->storeAs('uploads',$img_name,'public');
-          $category_img_url = "/storage/{$path}";
-
+        if($category_img)
+        {         
+          $category_img_url = $fileservice->upload($category_img);
         }
         
-
 
         $category = new Category();
         $category->category_name = $request->category_name;
         $category->category_slug = $slug;
         $category->parent_category_id = $request->parent_category_id;
         $category->category_description = $request->category_description;
-        $category->category_img_url = $category_img? $category_img_url:'';
+        $category->category_img_url = $category_img ? $category_img_url:'';
 
         $category->save();
 
@@ -84,31 +83,34 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $categories = $this->list();
+        unset($categories[$id]);
         return view('dashboard.category.edit',['category'=> $category,'categories'=>$categories]);
     }
 
-    function update(Request $request, $id)
+    function update(Request $request,FileService $fileservice, $id)
     {
-      
+        
         $validatedData = $request->validate([
           'category_name' => 'required|unique:categories,category_name,'.$id.'|max:255',
           'category_slug' => 'unique:categories,category_slug,'.$id.'|max:255',      
         ]);
 
+        $slug = $request->category_slug?
+        strtolower(str_replace(' ','-',$request->category_slug))
+        :strtolower(str_replace(' ','-',$request->category_name));
+
         $category_img = $request->file('category_img');
 
         if($category_img){
 
-          $img_name = time().$category_img->getClientOriginalName();
-          $path = $category_img->storeAs('uploads',$img_name,'public');
-          $category_img_url = "/storage/{$path}";
+          $category_img_url = $fileservice->upload($category_img);
 
         }
 
         Category::where('id',$id)
         ->update([
           'category_name' => $request->category_name,
-          'category_slug' => $request->category_slug,
+          'category_slug' => $slug,
           'parent_category_id' => $request->parent_category_id,
           'category_description' => $request->category_description,
           'category_img_url' => $category_img? $category_img_url:''
@@ -123,4 +125,6 @@ class CategoryController extends Controller
         Category::destroy($cat_id);
       
     }
+
+
 }
