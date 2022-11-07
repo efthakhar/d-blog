@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\dashboard\CategoryController;
+use App\Http\Controllers\dashboard\FileController;
+use App\Http\Controllers\dashboard\PostController;
 use App\Http\Controllers\dashboard\TagController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,17 @@ Route::group(['namespace' => 'dashboard'], function(){
     Route::get('/dashboard/tags/{id}/edit',[TagController::class,'edit'])->name('tag.edit');
     Route::put('/dashboard/tags/{id}/update',[TagController::class,'update'])->name('tag.update');
     Route::delete('/dashboard/tags/{id}',[TagController::class,'delete'])->name('tag.delete');
+
+    // Posts routes for dashboard
+    Route::get('/dashboard/posts',[PostController::class,'index'])->name('post.index');
+    Route::get('/dashboard/posts/create',[PostController::class,'create'])->name('post.create');
+    Route::post('/dashboard/posts',[PostController::class,'store'])->name('post.store');
+   // Route::get('/dashboard/tags/{id}',[TagController::class,'show'])->name('tag.show');
+    //Route::get('/dashboard/tags/{id}/edit',[TagController::class,'edit'])->name('tag.edit');
+    //Route::put('/dashboard/tags/{id}/update',[TagController::class,'update'])->name('tag.update');
+   // Route::delete('/dashboard/tags/{id}',[TagController::class,'delete'])->name('tag.delete');
+
+   Route::post('/files/upload',[FileController::class,'upload'])->name('file.store');
     
 });
 

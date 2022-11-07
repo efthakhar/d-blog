@@ -6,42 +6,33 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
+        
         Schema::create('posts', function (Blueprint $table) {
+
             $table->id();
-            $table->string('title');
-            $table->string('slug');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
 
-            $table->string('meta_keywords');
-            $table->string('meta_description');
+            $table->string('meta_keywords')->nullable();
+            $table->string('meta_description')->nullable();
 
-            $table->timestamp('date');
-            $table->bigInteger('author');
-            $table->string('post_thumbnail_url');
+            $table->timestamp('date')->nullable();
+            $table->bigInteger('author_id')->nullable();
+            $table->string('post_thumbnail_url')->nullable();
 
-
-            $table->longText('content');
-            $table->text('excerpt');
-
-            
-            $table->boolean('featured');
-            $table->boolean('breaking');
-           
+            $table->longText('content')->nullable();
+            $table->text('excerpt')->nullable();
+   
+            $table->boolean('featured')->nullable();
+            $table->boolean('breaking')->nullable();
             
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('posts');

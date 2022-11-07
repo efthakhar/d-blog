@@ -1,8 +1,10 @@
-/**
- * Main
- */
+
+
 
 'use strict';
+
+
+
 
 let menu, animate;
 
@@ -135,3 +137,7 @@ for(let i=0;i<links.length;i++){
     }
     
 }
+
+
+
+

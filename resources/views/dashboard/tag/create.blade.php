@@ -43,63 +43,62 @@
             <div class="row">
 
                     <div class="col-xl">
-                    <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">add new tag</h5>
-                        </div>
-                        <div class="card-body">
-                        <p class="sm-text">  
-                            @if(session('status'))
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-                            </p>
+                      <div class="card mb-4">
+                          <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">add new tag</h5>
+                          </div>
+                          <div class="card-body">
+                          <p class="sm-text">  
+                              @if(session('status'))
+                                  <div class="alert alert-success">
+                                      {{ session('status') }}
+                                  </div>
+                              @endif
+                              </p>
 
 
-                        <form class="col-md-7" method="post" action="{{url('dashboard/tags')}}">
-                            @csrf
-                            <!-- tag name -->
-                            <div class="mb-3">
-                                <label class="form-label" for="tag_name">tag Name</label>
-                                @error('tag_name')
-                                    <p class="alert alert-danger">{{ $message }}</p>
-                                @enderror      
-                                <input type="text" class="form-control" id="tag_name" 
-                                        placeholder="example tag..." name="tag_name" 
-                                        value="{{old('tag_name')}}"                   
-                                />
-                            </div>
+                          <form class="col-md-7" method="post" action="{{url('dashboard/tags')}}">
+                              @csrf
+                              <!-- tag name -->
+                              <div class="mb-3">
+                                  <label class="form-label" for="tag_name">tag Name</label>
+                                  @error('tag_name')
+                                      <p class="alert alert-danger">{{ $message }}</p>
+                                  @enderror      
+                                  <input type="text" class="form-control" id="tag_name" 
+                                          placeholder="example tag..." name="tag_name" 
+                                          value="{{old('tag_name')}}"                   
+                                  />
+                              </div>
 
-                            <!-- tag slug -->
-                            <div class="mb-3">
-                                <label class="form-label" for="tag_slug">tag slug</label>
-                                @error('tag_slug')
-                                    <p class="alert alert-danger">{{ $message }}</p>
-                                @enderror  
-                                <input type="text" class="form-control" id="tag_slug" 
-                                        placeholder="example slug..." name="tag_slug"
-                                        value="{{old('tag_slug')}}"                    
-                                />
-                            </div>
+                              <!-- tag slug -->
+                              <div class="mb-3">
+                                  <label class="form-label" for="tag_slug">tag slug</label>
+                                  @error('tag_slug')
+                                      <p class="alert alert-danger">{{ $message }}</p>
+                                  @enderror  
+                                  <input type="text" class="form-control" id="tag_slug" 
+                                          placeholder="example slug..." name="tag_slug"
+                                          value="{{old('tag_slug')}}"                    
+                                  />
+                              </div>
 
-                            
-                            <!-- tag description -->
-                            <div class="mb-3">
-                            <label class="form-label" for="basic-default-message">tag description</label>
-                            <textarea name="tag_description" class="form-control" placeholder="tag about something......" >{{old('tag_description')}}</textarea>
-                            </div>
+                              
+                              <!-- tag description -->
+                              <div class="mb-3">
+                              <label class="form-label" for="basic-default-message">tag description</label>
+                              <textarea name="tag_description" class="form-control" placeholder="tag about something......" >{{old('tag_description')}}</textarea>
+                              </div>
 
 
-                            <button type="submit" class="btn btn-primary">save tag</button>
+                              <button type="submit" class="btn btn-primary">save tag</button>
 
-                        </form>
-                        </div>
+                          </form>
+                          </div>
+                      </div>
                     </div>
-                    </div>
 
-                    </div>
-                    </div>
+                   
             </div>
             <!-- / Content -->
 
