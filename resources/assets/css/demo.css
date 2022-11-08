@@ -124,3 +124,14 @@ td .table_img{
   height: 40px;
   object-fit: cover;
 }
+
+.catBox{
+  display: none;
+}
+.catBoxHeader{
+  cursor: pointer;
+}
+.showCatBox{
+  display: block !important;
+  margin-bottom: 10px;
+}

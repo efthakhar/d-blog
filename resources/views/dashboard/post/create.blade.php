@@ -40,130 +40,178 @@
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-                <div class="row">
+              <div class="row">
 
-                    <div class="col-xl">
-                        <div class="card mb-4">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">add new post</h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="sm-text">  
-                                    @if(session('status'))
-                                        <div class="alert alert-success">
-                                            {{ session('status') }}
-                                        </div>
-                                    @endif
-                                </p>
+                <div class="col-xl">
+                    <div class="card mb-4">
+                      <div class="card-header d-flex justify-content-between align-items-center">
+                          <h5 class="mb-0">add new post</h5>
+                      </div>
+                      <div class="card-body">
+                        <p class="sm-text">  
+                            @if(session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                        </p>
 
-                                <form class="col-md-7" method="post" action="{{url('dashboard/posts')}}"
-                                enctype="multipart/form-data" >
-                                    @csrf
+                        <form class="col-md-7" method="post" action="{{url('dashboard/posts')}}"
+                        enctype="multipart/form-data" >
+                            @csrf
 
-                                    <!-- post date -->
-                                    <div class="mb-3">
-                                        <label class="form-label" for="title">date</label>
-                                        @error('date')
-                                            <p class="alert alert-danger">{{ $message }}</p>
-                                        @enderror      
-                                        <input type="date" class="form-control" id="date" 
-                                                name="date" value="{{old('date')}}"                   
-                                        />
-                                    </div>
+                            <?php
 
-                                    <!-- post title -->
-                                    <div class="mb-3">
-                                        <label class="form-label" for="title">title</label>
-                                        @error('title')
-                                            <p class="alert alert-danger">{{ $message }}</p>
-                                        @enderror      
-                                        <input type="text" class="form-control" id="title" 
-                                                placeholder="example title..." name="title" 
-                                                value="{{old('title')}}"                   
-                                        />
-                                    </div>
+                              function Childs($subcats)
+                              {      
 
-                                    <!-- post slug -->
-                                    <div class="mb-3">
-                                        <label class="form-label" for="slug">slug</label>
-                                        @error('slug')
-                                            <p class="alert alert-danger">{{ $message }}</p>
-                                        @enderror  
-                                        <input type="text" class="form-control" id="slug" 
-                                                placeholder="example slug..." name="slug"
-                                                value="{{old('slug')}}"                    
-                                        />
-                                    </div>
+                                        foreach($subcats as $subcat)
+                                        {
+                                          ?>
+                                            <div class="ms-4">
+                                            <input   type="checkbox" name="categories[]" 
+                                            id="{{$subcat->category_name}}" value="{{$subcat->id}}"
+                                            >
+                                            <label  for="{{$subcat->category_name}}">
+                                              {{$subcat->category_name}}
+                                            </label>
+                                              {{Childs($subcat->subcats)}}
+                                          </div>
 
-                                    <!-- Post image -->
-                                    <div class="mb-3">
-                                      <label class="form-label" for="post_thumbnail">Post Thumbnail</label>
+                                          <?php
+                                        }                      
                                   
-                                      @if(session('post_thumbnail_url'))                  
-                                      <img src="{{session('post_thumbnail_url')}}" alt="" 
-                                        style="width:100px;height:80px; margin:10px; display:block">
-                                      @endif
-                                    
-                                      <input type="file"
-                                       class="form-control" id="post_thumbnail"     name="post_thumbnail" value="post_thumbnail"
-                                      />
-                                    </div>
+                              }
 
-                                    <!-- meta tag keywords -->
-                                    <div class="mb-3">
-                                        <label class="form-label" for="meta_keywords">Keywords ( seo meta keywords )</label>
-                                        @error('meta_keywords')
-                                        <p class="alert alert-danger">{{ $message }}</p>
-                                        @enderror  
-                                        <input type="text" class="form-control" id="meta_keywords" 
-                                                placeholder="keywords...." name="meta_keywords"
-                                                value="{{old('meta_keywords')}}"                    
-                                        />
-                                    </div>
+                            ?>
+                            
 
-                                    <!-- meta tag description -->
-                                    <div class="mb-3">
-                                    <label class="form-label" for="basic-default-message">meta description ( seo  meta tag )</label>
-                                    <textarea name="meta_description" class="form-control" placeholder="write short description of this post......" 
-                                    >{{old('meta_description')}}</textarea>
-                                    </div>
-
-
-                                    <!-- post excerpt -->
-                                    <div class="mb-3">
-                                        <label class="form-label" for="excerpt">Excerpt</label>
-                                        @error('excerpt')
-                                        <p class="alert alert-danger">{{ $message }}</p>
-                                        @enderror  
-                                        <textarea name="excerpt" class="form-control" placeholder="excerpt of this post......" 
-                                        >{{old('excerpt')}}</textarea>
-                                    </div>
-
-                                    <!-- Post Content -->
-                                    <div class="mb-3">
-                                      <label class="form-label" for="excerpt">Content</label>
-                                      <textarea id="editor" name="content" class="description form-control"></textarea>
-                                    </div>
-
-                                    <div class="mb-3">
-                                      <input type="checkbox" name="featured" class="form" id="featured"> 
-                                      <label for="featured"> is featured ?</label>
-                                    </div>
-                                    <div class="mb-3">
-                                      <input type="checkbox" name="breaking" class="form" id="breaking"> 
-                                      <label for="breaking"> is breaking ?</label>
-                                    </div>
-
-
-                                    <button type="submit" class="btn btn-primary mt-3">save post</button>
-
-                                </form>
+                            <!-- post date -->
+                            <div class="mb-3">
+                                <label class="form-label" for="title">date</label>
+                                @error('date')
+                                    <p class="alert alert-danger">{{ $message }}</p>
+                                @enderror      
+                                <input type="date" class="form-control" id="date" 
+                                        name="date" value="{{old('date')}}"                   
+                                />
                             </div>
-                        </div>
+                            
+
+                            <!-- post title -->
+                            <div class="mb-3">
+                                <label class="form-label" for="title">title</label>
+                                @error('title')
+                                    <p class="alert alert-danger">{{ $message }}</p>
+                                @enderror      
+                                <input type="text" class="form-control" id="title" 
+                                        placeholder="example title..." name="title" 
+                                        value="{{old('title')}}"                   
+                                />
+                            </div>
+
+                            <!-- post slug -->
+                            <div class="mb-3">
+                                <label class="form-label" for="slug">slug</label>
+                                @error('slug')
+                                    <p class="alert alert-danger">{{ $message }}</p>
+                                @enderror  
+                                <input type="text" class="form-control" id="slug" 
+                                        placeholder="example slug..." name="slug"
+                                        value="{{old('slug')}}"                    
+                                />
+                            </div>
+
+                             <!-- Category -->
+                             <div style="user-select:none">
+                              <div class="bg-dark p-2 text-white catBoxHeader">
+                                 <label >Categories</label>
+                              </div>
+                              
+                              <div class="p-3 border border-dark  catBox">
+                                    @foreach($categories as $category)
+                                        <div>
+                                          <input  type="checkbox" name="categories[]"
+                                          id="{{$category->category_name}}" value="{{$category->id}}"
+                                          > <label for="{{$category->category_name}}">{{$category->category_name}}</label>
+                                          {{Childs($category->subcats) }} 
+
+                                        </div>
+                                    @endforeach
+                              </div>
+                            </div>
+
+                            <!-- Post image -->
+                            <div class="mb-3">
+                              <label class="form-label" for="post_thumbnail">Post Thumbnail</label>
+                          
+                              @if(session('post_thumbnail_url'))                  
+                              <img src="{{session('post_thumbnail_url')}}" alt="" 
+                                style="width:100px;height:80px; margin:10px; display:block">
+                              @endif
+                            
+                              <input type="file"
+                                class="form-control" id="post_thumbnail"     name="post_thumbnail" value="post_thumbnail"
+                              />
+                            </div>
+
+                            <!-- meta tag keywords -->
+                            <div class="mb-3">
+                                <label class="form-label" for="meta_keywords">Keywords ( seo meta keywords )</label>
+                                @error('meta_keywords')
+                                <p class="alert alert-danger">{{ $message }}</p>
+                                @enderror  
+                                <input type="text" class="form-control" id="meta_keywords" 
+                                        placeholder="keywords...." name="meta_keywords"
+                                        value="{{old('meta_keywords')}}"                    
+                                />
+                            </div>
+
+                            <!-- meta tag description -->
+                            <div class="mb-3">
+                              <label class="form-label" for="basic-default-message">meta description ( seo  meta tag )</label>
+                              <textarea name="meta_description" class="form-control" placeholder="write short description of this post......" 
+                              >{{old('meta_description')}}</textarea>
+                            </div>
+
+
+                            <!-- post excerpt -->
+                            <div class="mb-3">
+                                <label class="form-label" for="excerpt">Excerpt</label>
+                                @error('excerpt')
+                                <p class="alert alert-danger">{{ $message }}</p>
+                                @enderror  
+                                <textarea name="excerpt" class="form-control" placeholder="excerpt of this post......" 
+                                >{{old('excerpt')}}</textarea>
+                            </div>
+
+                            <!-- Post Content -->
+                            <div class="mb-3">
+                              <label class="form-label" for="excerpt">Content</label>
+                              <textarea id="editor" name="content" class="description form-control"></textarea>
+                            </div>
+
+                            <!-- featured or breaking -->
+
+                            <div class="mb-3">
+                              <input type="checkbox" name="featured" class="form" id="featured"> 
+                              <label for="featured"> is featured ?</label>
+                            </div>
+                            <div class="mb-3">
+                              <input type="checkbox" name="breaking" class="form" id="breaking"> 
+                              <label for="breaking"> is breaking ?</label>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary mt-3">save post</button>
+
+                        </form>
+                      </div>
                     </div>
-
-
                 </div>
+
+
+              </div>
             </div>
             <!-- / Content -->
 
@@ -185,6 +233,7 @@
    
     
     @includeif( 'dashboard.partials.script')
+    @vite('resources/assets/js/post.js')
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
             ClassicEditor

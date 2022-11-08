@@ -27,6 +27,7 @@ export default defineConfig({
                 'resources/assets/js/main.js',
                 'resources/assets/js/category.js',
                 'resources/assets/js/tag.js',
+                'resources/assets/js/post.js',
                 'resources/assets/js/dashboards-analytics.js',
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Services\FileService;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,25 +13,34 @@ class PostController extends Controller
 {
     function index()
     {     
-        $posts = Post::with('comments')->get();     
+        $posts = Post::with('comments')
+                ->orderby('id','desc')
+                ->paginate(5) ;  
+        
+        return view('dashboard.post.list',['posts'=>$posts]);
     }
 
-    function create()
+    function create(CategoryService $categoryService)
     {      
-        return  view('dashboard.post.create');
+        $categories = $categoryService->getAllCatWithSubcat();
+        return  view('dashboard.post.create',['categories'=> $categories]);
     }
 
     function store(Request $request, FileService $fileService)
     {
-        //dd($request->content);
+       
         $validatedData = $request->validate([
             'title' => 'required|unique:posts|max:255',
             'slug' => 'required|unique:posts|max:255',      
         ]);
 
+        
+
         $slug = $request->slug ? 
         strtolower(str_replace(' ','-',$request->slug))
         :strtolower(str_replace(' ','-',$request->title));
+
+
 
         $post = new Post();
         $post->title = $request->title;
@@ -44,14 +54,28 @@ class PostController extends Controller
        
         if($request->file('post_thumbnail'))
         {
-           // dd($request->post_thumbnail);
            $post_thumbnail_url = $fileService->upload($request->post_thumbnail);
            $post->post_thumbnail_url = $post_thumbnail_url ;
-
         }
        
-
         $post->save();
-        //return redirect('/dashboard/posts');
+
+        $categories = $request->categories;
+        //dd($categories);
+        foreach($categories as $cat)
+        {
+            DB::table('category_post')->insert([
+                'cat_id' => $cat,
+                'post_id'=> $post->id,
+            ]);
+        }
+        return redirect('/dashboard/posts');
+
     }
+
+    public function delete($id)
+    {
+        Post::destroy($id);
+    }
+
 }

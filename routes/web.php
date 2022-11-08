@@ -49,9 +49,12 @@ Route::group(['namespace' => 'dashboard'], function(){
    // Route::get('/dashboard/tags/{id}',[TagController::class,'show'])->name('tag.show');
     //Route::get('/dashboard/tags/{id}/edit',[TagController::class,'edit'])->name('tag.edit');
     //Route::put('/dashboard/tags/{id}/update',[TagController::class,'update'])->name('tag.update');
-   // Route::delete('/dashboard/tags/{id}',[TagController::class,'delete'])->name('tag.delete');
+    Route::delete('/dashboard/posts/{id}',[PostController::class,'delete'])->name('post.delete');
 
-   Route::post('/files/upload',[FileController::class,'upload'])->name('file.store');
+
+
+    // files
+    Route::post('/files/upload',[FileController::class,'upload'])->name('file.store');
     
 });
 
