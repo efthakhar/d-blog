@@ -73,7 +73,16 @@
                        @foreach($posts as $post)
                         <tr>
                           <td>{{$post->title}}</td>
-                          <td></td>
+                          <td>
+                            
+                            <div class="subcats_cell">
+                              @foreach($post->categories as $cat)
+                                <button class="btn btn-sm btn-outline-primary">
+                                  {{$cat->category_name}}
+                                </button>
+                              @endforeach 
+                              </div> 
+                          </td>
                           <td></td>                        
                           <td>
                             <div class="dropdown">

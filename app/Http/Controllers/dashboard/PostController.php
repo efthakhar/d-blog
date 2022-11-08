@@ -16,7 +16,6 @@ class PostController extends Controller
         $posts = Post::with('comments')
                 ->orderby('id','desc')
                 ->paginate(5) ;  
-        
         return view('dashboard.post.list',['posts'=>$posts]);
     }
 
@@ -44,7 +43,7 @@ class PostController extends Controller
 
         $post = new Post();
         $post->title = $request->title;
-        $post->slug = $request->slug;
+        $post->slug = $slug;
         $post->meta_keywords = $request->meta_keywords;
         $post->meta_description = $request->meta_description;
         $post->excerpt = $request->excerpt;
@@ -62,13 +61,18 @@ class PostController extends Controller
 
         $categories = $request->categories;
         //dd($categories);
-        foreach($categories as $cat)
+        if($categories)
         {
-            DB::table('category_post')->insert([
-                'cat_id' => $cat,
-                'post_id'=> $post->id,
-            ]);
+            foreach($categories as $cat)
+            {
+                DB::table('category_post')->insert([
+                    'cat_id' => $cat,
+                    'post_id'=> $post->id,
+                ]);
+            }
+
         }
+        
         return redirect('/dashboard/posts');
 
     }
@@ -76,6 +80,9 @@ class PostController extends Controller
     public function delete($id)
     {
         Post::destroy($id);
+        DB::table('category_post')
+        ->where('post_id',$id)
+        ->delete();
     }
 
 }

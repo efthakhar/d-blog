@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('category_post', function (Blueprint $table) {
             $table->bigInteger('cat_id');
             $table->bigInteger('post_id');
-            $table->unique('cat_id','post_id');
+            $table->unique(['cat_id','post_id']);
         });
     }
 
