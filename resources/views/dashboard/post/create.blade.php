@@ -88,7 +88,7 @@
 
                             <!-- post date -->
                             <div class="mb-3">
-                                <label class="form-label" for="title">date</label>
+                                <label class="form-label" for="date">date</label>
                                 @error('date')
                                     <p class="alert alert-danger">{{ $message }}</p>
                                 @enderror      

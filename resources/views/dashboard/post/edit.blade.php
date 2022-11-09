@@ -56,9 +56,12 @@
                             @endif
                         </p>
 
-                        <form class="col-md-7" method="post" action="{{url('dashboard/posts')}}"
-                        enctype="multipart/form-data" >
+                        <form class="col-md-7" method="post" 
+                          action="{{url('dashboard/posts/'.$post->id.'/update')}}"
+                          enctype="multipart/form-data"
+                        >
                             @csrf
+                            @method('PUT')
 
                             <?php
 
@@ -89,12 +92,12 @@
 
                             <!-- post date -->
                             <div class="mb-3">
-                                <label class="form-label" for="title">date</label>
+                                <label class="form-label" for="date">date</label>
                                 @error('date')
                                     <p class="alert alert-danger">{{ $message }}</p>
                                 @enderror      
-                                <input type="date" class="form-control" id="date" 
-                                        name="date" value="{{$post->date}}"                   
+                                <input type="date" class="form-control" id="date"   name="date" 
+                                   value="{{date( "Y-m-d", strtotime($post->date))}}"                   
                                 />
                             </div>
                             
@@ -153,11 +156,13 @@
                               
                               <div class="p-3 border border-dark  tagBox">
                                     @foreach($tags as $tag)
+                                          <div>
                                           <input  type="checkbox" name="tags[]"
                                           id="{{$tag->id}}" value="{{$tag->id}}"
                                           {{ in_array( $tag->id ,$post_tags) ? 'checked':'' }}
                                           > 
                                           <label for="{{$tag->id}}">{{$tag->tag_name}}</label>
+                                          </div>
                                     @endforeach
                               </div>
                             </div>
@@ -215,16 +220,20 @@
                             <!-- featured or breaking -->
 
                             <div class="mb-3">
-                              <input type="checkbox" name="featured" class="form" id="featured"> 
+                              <input type="checkbox" name="featured" class="form" id="featured"
+                                {{$post->featured==1? 'checked':''}}
+                              > 
                               <label for="featured"> is featured ?</label>
                             </div>
                             <div class="mb-3">
-                              <input type="checkbox" name="breaking" class="form" id="breaking"> 
+                              <input type="checkbox" name="breaking" class="form" id="breaking"
+                              {{$post->breaking==1? 'checked':''}}
+                              > 
                               <label for="breaking"> is breaking ?</label>
                             </div>
 
 
-                            <button type="submit" class="btn btn-primary mt-3">save post</button>
+                            <button type="submit" class="btn btn-primary mt-3">update post</button>
 
                         </form>
                       </div>
