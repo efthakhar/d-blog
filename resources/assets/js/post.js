@@ -28,3 +28,12 @@ let catBoxHeader = document.querySelector('.catBoxHeader')
 catBoxHeader.addEventListener('click',(e)=>{
   catBox.classList.toggle('showCatBox')
 })
+
+let tagBox = document.querySelector('.tagBox');
+// catBox.style.display = 'none'
+
+let tagBoxHeader = document.querySelector('.tagBoxHeader')
+
+tagBoxHeader.addEventListener('click',(e)=>{
+  tagBox.classList.toggle('showTagBox')
+})

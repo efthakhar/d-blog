@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Services\FileService;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
@@ -13,27 +14,29 @@ class PostController extends Controller
 {
     function index()
     {     
-        $posts = Post::with('comments')
+        //DB::enableQueryLog();
+        $posts = Post::with('categories')
+                ->with('tags')
                 ->orderby('id','desc')
                 ->paginate(5) ;  
+              
         return view('dashboard.post.list',['posts'=>$posts]);
     }
 
     function create(CategoryService $categoryService)
     {      
         $categories = $categoryService->getAllCatWithSubcat();
-        return  view('dashboard.post.create',['categories'=> $categories]);
+        $tags = Tag::all();
+        return  view('dashboard.post.create',['categories'=> $categories,'tags'=>$tags]);
     }
 
     function store(Request $request, FileService $fileService)
     {
-       
+       // dd($request->tags);
         $validatedData = $request->validate([
             'title' => 'required|unique:posts|max:255',
             'slug' => 'required|unique:posts|max:255',      
         ]);
-
-        
 
         $slug = $request->slug ? 
         strtolower(str_replace(' ','-',$request->slug))
@@ -60,13 +63,25 @@ class PostController extends Controller
         $post->save();
 
         $categories = $request->categories;
-        //dd($categories);
+        $tags = $request->tags;
+        
         if($categories)
         {
             foreach($categories as $cat)
             {
                 DB::table('category_post')->insert([
                     'cat_id' => $cat,
+                    'post_id'=> $post->id,
+                ]);
+            }
+
+        }
+        if($tags)
+        {
+            foreach($tags as $tag)
+            {
+                DB::table('post_tag')->insert([
+                    'tag_id' => $tag,
                     'post_id'=> $post->id,
                 ]);
             }

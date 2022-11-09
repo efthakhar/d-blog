@@ -83,7 +83,15 @@
                               @endforeach 
                               </div> 
                           </td>
-                          <td></td>                        
+                          <td>
+                              <div class="subcats_cell">
+                                  @foreach($post->tags as $tag)
+                                    <button class="btn btn-sm btn-outline-warning">
+                                      {{$tag->tag_name}}
+                                    </button>
+                                  @endforeach 
+                              </div> 
+                          </td>                        
                           <td>
                             <div class="dropdown">
                               <button type="button" class="btn btn-primary btn-sm p-1 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"
@@ -143,5 +151,6 @@
 
     @includeif('dashboard.partials.script')
     @vite('resources/assets/js/post.js')
+    <!-- {{dd(DB::getQueryLog())}}  -->
   </body>
 </html>

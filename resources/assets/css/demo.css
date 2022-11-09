@@ -130,8 +130,20 @@ td .table_img{
 }
 .catBoxHeader{
   cursor: pointer;
+  
 }
 .showCatBox{
+  display: block !important;
+  margin-bottom: 10px;
+}
+.tagBox{
+  display: none;
+}
+.tagBoxHeader{
+  margin-top: 10px;
+  cursor: pointer;
+}
+.showTagBox{
   display: block !important;
   margin-bottom: 10px;
 }

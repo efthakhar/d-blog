@@ -140,6 +140,21 @@
                                     @endforeach
                               </div>
                             </div>
+                             <!-- Tags-->
+                             <div style="user-select:none">
+                              <div class="bg-dark p-2 text-white tagBoxHeader">
+                                 <label >Tags</label>
+                              </div>
+                              
+                              <div class="p-3 border border-dark  tagBox">
+                                    @foreach($tags as $tag)
+                                          <input  type="checkbox" name="tags[]"
+                                          id="{{$tag->id}}" value="{{$tag->id}}"
+                                          > 
+                                          <label for="{{$tag->id}}">{{$tag->tag_name}}</label>
+                                    @endforeach
+                              </div>
+                            </div>
 
                             <!-- Post image -->
                             <div class="mb-3">
