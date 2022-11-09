@@ -47,7 +47,7 @@ Route::group(['namespace' => 'dashboard'], function(){
     Route::get('/dashboard/posts/create',[PostController::class,'create'])->name('post.create');
     Route::post('/dashboard/posts',[PostController::class,'store'])->name('post.store');
    // Route::get('/dashboard/tags/{id}',[TagController::class,'show'])->name('tag.show');
-    //Route::get('/dashboard/tags/{id}/edit',[TagController::class,'edit'])->name('tag.edit');
+    Route::get('/dashboard/posts/{id}/edit',[PostController::class,'edit'])->name('post.edit');
     //Route::put('/dashboard/tags/{id}/update',[TagController::class,'update'])->name('tag.update');
     Route::delete('/dashboard/posts/{id}',[PostController::class,'delete'])->name('post.delete');
 

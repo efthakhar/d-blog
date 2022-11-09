@@ -51,13 +51,13 @@
                 <div class="card-body">
                   <div class="d-flex flex-wrap">
                     
-                    <input name="catfilter"
+                    <!-- <input name="catfilter"
                      class="form-control form-control-sm filtercatinput mb-2 me-2" type="text" style="width: 200px ;"
                      placeholder="search cetegory.....">
                     
                     <button class="btn btn-sm btn-primary filtercat mb-2"
                     style="width: 90px;"
-                    >filter</button>
+                    >filter</button> -->
                   </div>
                   <div class="table-responsive text-nowrap">
                     <table class="table table-bordered table-hover table-sm">
@@ -99,10 +99,10 @@
                                 options 
                               </button>
                               <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/dashboard/categories/{{$post->id}}/edit"
+                                <a class="dropdown-item" href="/dashboard/posts/{{$post->id}}/edit"
                                   ><i class="bx bx-edit-alt me-1"></i> Edit
                                  </a>
-                                <a class="dropdown-item" href="/dashboard/categories/{{$post->id}}">
+                                <a class="dropdown-item" href="/dashboard/posts/{{$post->id}}">
                                   <i class="bx bx-edit-alt me-1"></i>view
                                  </a>
                                 <button class="dropdown-item deleteRecord" data-post-id="{{$post->id}}">
