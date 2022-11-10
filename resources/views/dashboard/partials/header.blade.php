@@ -45,7 +45,9 @@
   
  
   <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-  
+    @error('demo_error')
+    <p class="text-danger alert alert-danger">{{$message}}</p>
+    @enderror
   </div>
   <a href="/logout" class="btn btn-sm btn-primary">logout</a>
   <div class="user-info ms-auto" style="min-width: 100px; text-align:right">

@@ -178,6 +178,25 @@
       </ul>
     </li>
 
+    <!-- Files -->
+    <li class="menu-item toggle_main">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <div>Media</div>
+      </a>
+      <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="/dashboard/files" class="menu-link">
+              <div data-i18n="Without menu">Media files</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="/dashboard" class="menu-link">
+              <div data-i18n="Without menu">Upload new file</div>
+            </a>
+          </li>
+      </ul>
+    </li>
+
 
   </ul>
 </aside>

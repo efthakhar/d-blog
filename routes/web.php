@@ -64,6 +64,8 @@ Route::group([
 
     // files
     Route::post('/files/upload',[FileController::class,'upload'])->name('file.store');
+    Route::get('/files/delete/{id}',[FileController::class,'delete'])->name('file.delete');
+    Route::get('dashboard/files/',[FileController::class,'list'])->name('file.list');
 
     
     

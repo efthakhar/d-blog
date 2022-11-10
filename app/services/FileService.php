@@ -12,14 +12,7 @@ class FileService{
 
     function upload($file)
     {
-        // dd($file);
-
-        //  $document->getRealPath();
-        //  $document->getClientOriginalName();
-        //  $document->getClientOriginalExtension();
-        //  $document->getSize();
-        //  $document->getMimeType();
-
+       
        
         $file_name = time().$file->getClientOriginalName();
         $type = $file->getMimeType();

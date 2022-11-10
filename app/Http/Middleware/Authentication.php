@@ -17,8 +17,15 @@ class Authentication
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check())
+        if(Auth::check()  )
         {
+            // disable edit,delete and create request in demo
+            // if(!$request->isMethod('get'))
+            // {
+            //     return back()->withErrors([
+            //         'demo_error' => 'not allowed to do this in demo version',
+            //     ])->onlyInput('email');
+            // }
             return $next($request);
         }
         return redirect('login')->with('auth_error','You are not authenticated user');
