@@ -42,9 +42,14 @@
   <!-- <div class="topbar-heading">
     <h6>Hi blogger, welcome to dblog blog system</h6>
   </div> -->
-
+  
+ 
   <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-    
+  
+  </div>
+  <a href="/logout" class="btn btn-sm btn-primary">logout</a>
+  <div class="user-info ms-auto" style="min-width: 100px; text-align:right">
+   hi, {{auth()->user() ?auth()->user()->name:''}}
   </div>
 </nav>
 <!-- / Navbar -->

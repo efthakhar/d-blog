@@ -92,6 +92,28 @@ class PostController extends Controller
         return redirect('/dashboard/posts');
 
     }
+    function show($id,CategoryService $categoryService)
+    {      
+        $categories = $categoryService->getAllCatWithSubcat();
+        $tags = Tag::all();
+        $post = Post::find($id);
+        $post_cats = DB::table('category_post')
+                    ->where('post_id',$id)
+                    ->pluck('category_post.cat_id')->toArray();
+                    
+        $post_tags = DB::table('post_tag')
+                    ->where('post_id',$id)
+                    ->pluck('post_tag.tag_id')->toArray();
+        
+        return  view('dashboard.post.view',
+        [
+            'post'=>$post,
+            'categories'=> $categories,
+            'tags'=>$tags,
+            'post_cats' => $post_cats,
+            'post_tags' => $post_tags
+        ]);
+    }
     function edit($id,CategoryService $categoryService)
     {      
         $categories = $categoryService->getAllCatWithSubcat();

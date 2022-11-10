@@ -41,41 +41,35 @@
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row">
-
+                
                 <div class="col-xl">
                     <div class="card mb-4">
                       <div class="card-header d-flex justify-content-between align-items-center">
-                          <h5 class="mb-0">add new post</h5>
+                          <h5 class="mb-0">view  post details</h5>
                       </div>
                       <div class="card-body">
-                        <p class="sm-text">  
-                            @if(session('status'))
-                                <div class="alert alert-success">
-                                    {{ session('status') }}
-                                </div>
-                            @endif
-                        </p>
+                        
 
-                        <form class="col-md-7" method="post" action="{{url('dashboard/posts')}}"
-                        enctype="multipart/form-data" >
-                            @csrf
+                        <form class="col-md-7" >
+                           
 
                             <?php
 
-                              function Childs($subcats)
+                              function Childs($subcats,$post_cats)
                               {      
 
                                         foreach($subcats as $subcat)
                                         {
                                           ?>
                                             <div class="ms-4">
-                                            <input   type="checkbox" name="categories[]" 
+                                            <input disabled  type="checkbox" name="categories[]" 
                                             id="{{$subcat->category_name}}" value="{{$subcat->id}}"
+                                            {{ in_array($subcat->id ,$post_cats) ? 'checked':'' }}
                                             >
                                             <label  for="{{$subcat->category_name}}">
                                               {{$subcat->category_name}}
                                             </label>
-                                              {{Childs($subcat->subcats)}}
+                                              {{Childs($subcat->subcats,$post_cats)}}
                                           </div>
 
                                           <?php
@@ -89,11 +83,8 @@
                             <!-- post date -->
                             <div class="mb-3">
                                 <label class="form-label" for="date">date</label>
-                                @error('date')
-                                    <p class="alert alert-danger">{{ $message }}</p>
-                                @enderror      
-                                <input type="date" class="form-control" id="date" 
-                                        name="date" value="{{old('date')}}"                   
+                                <input disabled type="date" class="form-control" id="date"   name="date" 
+                                   value="{{date( "Y-m-d", strtotime($post->date))}}"                   
                                 />
                             </div>
                             
@@ -101,24 +92,18 @@
                             <!-- post title -->
                             <div class="mb-3">
                                 <label class="form-label" for="title">title</label>
-                                @error('title')
-                                    <p class="alert alert-danger">{{ $message }}</p>
-                                @enderror      
-                                <input type="text" class="form-control" id="title" 
+                                <input disabled type="text" class="form-control" id="title" 
                                         placeholder="example title..." name="title" 
-                                        value="{{old('title')}}"                   
+                                        value="{{$post->title}}"                   
                                 />
                             </div>
 
                             <!-- post slug -->
                             <div class="mb-3">
                                 <label class="form-label" for="slug">slug</label>
-                                @error('slug')
-                                    <p class="alert alert-danger">{{ $message }}</p>
-                                @enderror  
-                                <input type="text" class="form-control" id="slug" 
+                                <input disabled type="text" class="form-control" id="slug" 
                                         placeholder="example slug..." name="slug"
-                                        value="{{old('slug')}}"                    
+                                        value="{{$post->slug}}"                    
                                 />
                             </div>
 
@@ -131,12 +116,16 @@
                               <div class="p-3 border border-dark  catBox">
                                     @foreach($categories as $category)
                                         <div>
-                                          <input  type="checkbox" name="categories[]"
-                                          id="{{$category->category_name}}" value="{{$category->id}}"
-                                          > <label for="{{$category->category_name}}">{{$category->category_name}}</label>
-                                          {{Childs($category->subcats) }} 
+                                          <input disabled  type="checkbox" name="categories[]"
+                                            id="{{$category->category_name}}" value="{{$category->id}}"
+                                            {{ in_array( $category->id ,$post_cats) ? 'checked':'' }}
+                                          > 
+                                          <label for="{{$category->category_name}}">  
+                                             {{$category->category_name}}
+                                          </label>  
+                                          {{Childs($category->subcats,$post_cats) }} 
 
-                                        </div>
+                                        </div>  
                                     @endforeach
                               </div>
                             </div>
@@ -148,10 +137,13 @@
                               
                               <div class="p-3 border border-dark  tagBox">
                                     @foreach($tags as $tag)
-                                          <input  type="checkbox" name="tags[]"
+                                          <div>
+                                          <input disabled  type="checkbox" name="tags[]"
                                           id="{{$tag->id}}" value="{{$tag->id}}"
+                                          {{ in_array( $tag->id ,$post_tags) ? 'checked':'' }}
                                           > 
-                                          <label for="{{$tag->id}}">{{$tag->tag_name}}</label><br>
+                                          <label for="{{$tag->id}}">{{$tag->tag_name}}</label>
+                                          </div>
                                     @endforeach
                               </div>
                             </div>
@@ -160,14 +152,10 @@
                             <div class="mb-3">
                               <label class="form-label" for="post_thumbnail">Post Thumbnail</label>
                           
-                              @if(session('post_thumbnail_url'))                  
-                              <img src="{{session('post_thumbnail_url')}}" alt="" 
+                              @if($post->post_thumbnail_url)                  
+                              <img src="{{$post->post_thumbnail_url}}" alt="" 
                                 style="width:100px;height:80px; margin:10px; display:block">
                               @endif
-                            
-                              <input type="file"
-                                class="form-control" id="post_thumbnail"     name="post_thumbnail" value="post_thumbnail"
-                              />
                             </div>
 
                             <!-- meta tag keywords -->
@@ -176,17 +164,17 @@
                                 @error('meta_keywords')
                                 <p class="alert alert-danger">{{ $message }}</p>
                                 @enderror  
-                                <input type="text" class="form-control" id="meta_keywords" 
+                                <input disabled type="text" class="form-control" id="meta_keywords" 
                                         placeholder="keywords...." name="meta_keywords"
-                                        value="{{old('meta_keywords')}}"                    
+                                        value="{{$post->meta_keywords}}"                    
                                 />
                             </div>
 
                             <!-- meta tag description -->
                             <div class="mb-3">
                               <label class="form-label" for="basic-default-message">meta description ( seo  meta tag )</label>
-                              <textarea name="meta_description" class="form-control" placeholder="write short description of this post......" 
-                              >{{old('meta_description')}}</textarea>
+                              <textarea disabled name="meta_description" class="form-control" placeholder="write short description of this post......" 
+                              >{{$post->meta_description}}</textarea>
                             </div>
 
 
@@ -196,29 +184,30 @@
                                 @error('excerpt')
                                 <p class="alert alert-danger">{{ $message }}</p>
                                 @enderror  
-                                <textarea name="excerpt" class="form-control" placeholder="excerpt of this post......" 
-                                >{{old('excerpt')}}</textarea>
+                                <textarea disabled name="excerpt" class="form-control" placeholder="excerpt of this post......" 
+                                >{{$post->excerpt}}</textarea>
                             </div>
 
                             <!-- Post Content -->
-                            <div class="mb-3">
+                            <div class="mb-3 ">
                               <label class="form-label" for="excerpt">Content</label>
-                              <textarea id="editor" name="content" class="description form-control"></textarea>
+                              <textarea disabled id="editor" name="content" class="description form-control">{{$post->content}}</textarea>
                             </div>
 
                             <!-- featured or breaking -->
 
                             <div class="mb-3">
-                              <input type="checkbox" name="featured" class="form" id="featured"> 
+                              <input disabled type="checkbox" name="featured" class="form" id="featured"
+                                {{$post->featured==1? 'checked':''}}
+                              > 
                               <label for="featured"> is featured ?</label>
                             </div>
                             <div class="mb-3">
-                              <input type="checkbox" name="breaking" class="form" id="breaking"> 
+                              <input disabled type="checkbox" name="breaking" class="form" id="breaking"
+                              {{$post->breaking==1? 'checked':''}}
+                              > 
                               <label for="breaking"> is breaking ?</label>
                             </div>
-
-
-                            <button type="submit" class="btn btn-primary mt-3">save post</button>
 
                         </form>
                       </div>
